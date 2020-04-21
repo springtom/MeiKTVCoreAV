@@ -1,0 +1,3 @@
+rootProject.name='MeiKTVCoreAV'
+include ':app'
+include ':coreav'
