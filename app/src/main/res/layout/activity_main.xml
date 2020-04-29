@@ -1,19 +1,353 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/sample_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <TextView android:layout_height="wrap_content"
+        android:text="EQ"
+        android:layout_width="wrap_content" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dip"
+        android:gravity="center"
+        android:background="@color/colorAccent"
+        android:orientation="horizontal"
+       >
+      <LinearLayout
+          android:layout_width="0dp"
+          android:layout_weight="1"
+          android:layout_height="match_parent"
+          android:gravity="center"
+          android:orientation="vertical"
+          >
+          <TextView android:layout_height="wrap_content"
+              android:text="60HZ"
+              android:layout_width="wrap_content" />
+        <com.jaygoo.widget.VerticalRangeSeekBar
+            android:id="@+id/seekbar1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:rsb_tick_mark_text_margin="15dp"
+            app:rsb_tick_mark_mode="other"
+            app:rsb_min="-15"
+            app:rsb_max="15"
+            app:rsb_tick_mark_gravity="center"
+            app:rsb_mode="single" />
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            >
+            <TextView android:layout_height="wrap_content"
+                android:text="230HZ"
+                android:layout_width="wrap_content" />
+            <com.jaygoo.widget.VerticalRangeSeekBar
+                android:id="@+id/seekbar2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:rsb_tick_mark_text_margin="15dp"
+                app:rsb_tick_mark_mode="other"
+                app:rsb_min="-15"
+                app:rsb_max="15"
+                app:rsb_tick_mark_gravity="center"
+                app:rsb_mode="single" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            >
+            <TextView android:layout_height="wrap_content"
+                android:text="910HZ"
+                android:layout_width="wrap_content" />
+            <com.jaygoo.widget.VerticalRangeSeekBar
+                android:id="@+id/seekbar3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:rsb_tick_mark_text_margin="15dp"
+                app:rsb_tick_mark_mode="other"
+                app:rsb_min="-15"
+                app:rsb_max="15"
+                app:rsb_tick_mark_gravity="center"
+                app:rsb_mode="single" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            >
+            <TextView android:layout_height="wrap_content"
+                android:text="1500HZ"
+                android:layout_width="wrap_content" />
+            <com.jaygoo.widget.VerticalRangeSeekBar
+                android:id="@+id/seekbar4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:rsb_tick_mark_text_margin="15dp"
+                app:rsb_tick_mark_mode="other"
+                app:rsb_min="-15"
+                app:rsb_max="15"
+                app:rsb_tick_mark_gravity="center"
+                app:rsb_mode="single" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            >
+            <TextView android:layout_height="wrap_content"
+                android:text="3600HZ"
+                android:layout_width="wrap_content" />
+            <com.jaygoo.widget.VerticalRangeSeekBar
+                android:id="@+id/seekbar5"
+                android:layout_width="match_parent"
+                app:rsb_tick_mark_text_margin="15dp"
+                app:rsb_min="-15"
+                app:rsb_max="15"
+                android:layout_height="match_parent"
+                app:rsb_tick_mark_mode="other"
+                app:rsb_tick_mark_gravity="center"
+                app:rsb_mode="single" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            >
+            <TextView android:layout_height="wrap_content"
+                android:text="6000HZ"
+                android:layout_width="wrap_content" />
+            <com.jaygoo.widget.VerticalRangeSeekBar
+                android:id="@+id/seekbar6"
+                app:rsb_tick_mark_text_margin="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:rsb_tick_mark_mode="other"
+                app:rsb_min="-15"
+                app:rsb_max="15"
+                app:rsb_tick_mark_gravity="center"
+                app:rsb_mode="single" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView android:layout_height="wrap_content"
+        android:text="Reverb"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content" />
+    <LinearLayout android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content">
+        <TextView android:layout_height="wrap_content"
+            android:text="混响大小"
+
+            android:layout_width="90dip" />
+        <TextView android:layout_height="wrap_content"
+            android:text="0"
+
+            android:layout_width="wrap_content" />
+        <com.jaygoo.widget.RangeSeekBar
+            android:id="@+id/seekbar7"
+            app:rsb_min="0"
+            app:rsb_max="100"
+            app:rsb_tick_mark_text_margin="15dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            app:rsb_tick_mark_mode="other"
+            app:rsb_tick_mark_gravity="center"
+            app:rsb_mode="single" />
+        <TextView android:layout_height="wrap_content"
+            android:text="100"
+
+            android:layout_width="wrap_content" />
+
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dip"
+        android:layout_height="wrap_content">
+        <TextView android:layout_height="wrap_content"
+            android:text="高频阻尼"
+
+            android:layout_width="90dip" />
+        <TextView android:layout_height="wrap_content"
+            android:text="0"
+
+            android:layout_width="wrap_content" />
+        <com.jaygoo.widget.RangeSeekBar
+            android:id="@+id/seekbar8"
+            app:rsb_min="0"
+            app:rsb_max="100"
+            app:rsb_tick_mark_text_margin="15dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            app:rsb_tick_mark_mode="other"
+            app:rsb_tick_mark_gravity="center"
+            app:rsb_mode="single" />
+        <TextView android:layout_height="wrap_content"
+            android:text="100"
+
+            android:layout_width="wrap_content" />
+
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dip"
+        android:layout_height="wrap_content">
+        <TextView android:layout_height="wrap_content"
+            android:text="房间大小"
+
+            android:layout_width="90dip" />
+        <TextView android:layout_height="wrap_content"
+            android:text="0"
+
+            android:layout_width="wrap_content" />
+        <com.jaygoo.widget.RangeSeekBar
+            android:id="@+id/seekbar9"
+            app:rsb_min="0"
+            app:rsb_max="100"
+            app:rsb_tick_mark_text_margin="15dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            app:rsb_tick_mark_mode="other"
+            app:rsb_tick_mark_gravity="center"
+            app:rsb_mode="single" />
+        <TextView android:layout_height="wrap_content"
+            android:text="100"
+
+            android:layout_width="wrap_content" />
+
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dip"
+        android:layout_height="wrap_content">
+        <TextView android:layout_height="wrap_content"
+            android:text="立体声深度"
+
+            android:layout_width="90dip" />
+        <TextView android:layout_height="wrap_content"
+            android:text="0"
+
+            android:layout_width="wrap_content" />
+        <com.jaygoo.widget.RangeSeekBar
+            android:id="@+id/seekbar10"
+            app:rsb_min="0"
+            app:rsb_max="100"
+            app:rsb_tick_mark_text_margin="15dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            app:rsb_tick_mark_mode="other"
+            app:rsb_tick_mark_gravity="center"
+            app:rsb_mode="single" />
+        <TextView android:layout_height="wrap_content"
+            android:text="100"
+
+            android:layout_width="wrap_content" />
+
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dip"
+        android:layout_height="wrap_content">
+        <TextView android:layout_height="wrap_content"
+            android:text="早反射声时间"
+
+            android:layout_width="90dip" />
+        <TextView android:layout_height="wrap_content"
+            android:text="0"
+
+            android:layout_width="wrap_content" />
+        <com.jaygoo.widget.RangeSeekBar
+            android:id="@+id/seekbar11"
+            app:rsb_min="0"
+            app:rsb_max="100"
+            app:rsb_tick_mark_text_margin="15dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            app:rsb_tick_mark_mode="other"
+            app:rsb_tick_mark_gravity="center"
+            app:rsb_mode="single" />
+        <TextView android:layout_height="wrap_content"
+            android:text="100"
+
+            android:layout_width="wrap_content" />
+
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dip"
+        android:layout_height="wrap_content">
+        <TextView android:layout_height="wrap_content"
+            android:text="湿声增益"
+
+            android:layout_width="90dip" />
+        <TextView android:layout_height="wrap_content"
+            android:text="0"
+
+            android:layout_width="wrap_content" />
+        <com.jaygoo.widget.RangeSeekBar
+            android:id="@+id/seekbar12"
+            app:rsb_min="0"
+            app:rsb_max="10"
+            app:rsb_tick_mark_text_margin="15dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            app:rsb_tick_mark_mode="other"
+            app:rsb_tick_mark_gravity="center"
+            app:rsb_mode="single" />
+        <TextView android:layout_height="wrap_content"
+            android:text="10"
+
+            android:layout_width="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_width="match_parent">
+        <Button android:layout_height="wrap_content"
+            android:text="初始化"
+            android:id="@+id/but1"
+            android:layout_width="wrap_content" />
+        <Button android:layout_height="wrap_content"
+            android:text="初始化录制播放"
+            android:id="@+id/but2"
+            android:visibility="gone"
+            android:layout_width="wrap_content" />
+        <Button android:layout_height="wrap_content"
+            android:text="录制"
+            android:id="@+id/but3"
+            android:layout_width="wrap_content" />
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
