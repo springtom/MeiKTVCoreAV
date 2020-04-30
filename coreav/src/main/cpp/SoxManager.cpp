@@ -19,7 +19,6 @@ void SoxManager::initArgs(int sampleRate, int butterSize, int channels) {
     LOGE("SoxManager initArgs2");
     SoxBaseEffect::outputSample = new short[butterSize * 2];
     this->sampleRate = sampleRate;
-    this->bufferSize = butterSize;
     this->channels = channels;
     sox_globals.bufsiz = butterSize;
     LOGE("SoxManager initArgs3");

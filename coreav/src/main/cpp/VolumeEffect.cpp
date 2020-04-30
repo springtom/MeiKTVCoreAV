@@ -15,7 +15,7 @@ int VolumeEffect::initChild() {
     assert(sox_add_effect(chain, vol_effect, &signalInfo, &signalInfo) == SOX_SUCCESS);
     delete[] *args;
     delete vol_effect;
-    LOGE("LowPassEffect::initChild2");
+    LOGE("VolumeEffect::initChild2");
     return SUCCESS;
 }
 

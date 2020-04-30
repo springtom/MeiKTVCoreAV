@@ -25,9 +25,9 @@ class MainActivity : AppCompatActivity(), OnRangeChangedListener {
         )
     }
 
-    var addVol = 0;
-    var lowPassFrequency = 8000;
-    var highPassFrequency = 100;
+    var addVol = 1
+    var lowPassFrequency = 8000
+    var highPassFrequency = 100
 
     var array = arrayOf("-15db", "-10db", "-5db", "0", "5db", "10db", "15db")
     var wet_echo_reverb = arrayOf("0.1", "0.2", "0.3", "0.4", "0.5", "0.6", "0.7", "0.8", "0.9")
@@ -39,7 +39,6 @@ class MainActivity : AppCompatActivity(), OnRangeChangedListener {
         floatArrayOf(3600f, 0.2f, 0f),
         floatArrayOf(6000f, 0.2f, 0f)
     )
-
 
     var reverberance = 90
     var damping = 20
@@ -203,16 +202,19 @@ class MainActivity : AppCompatActivity(), OnRangeChangedListener {
         seekbar16.setOnRangeChangedListener(this)
         seekbar17.setOnRangeChangedListener(this)
 
-
-
-
         but1.setOnClickListener {
+            if ("录制中".equals(but3.text)) {
+                Toast.makeText(this,"请先暂停点击录制中，暂停录制",Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+
             iniiAudioEffect()
         }
         but2.setOnClickListener {
 
         }
         but3.setOnClickListener {
+
 
             AudioController.init()
             if ("录制".equals(but3.text)) {
@@ -225,7 +227,10 @@ class MainActivity : AppCompatActivity(), OnRangeChangedListener {
         }
     }
 
+
+
     private fun iniiAudioEffect() {
+
         AudioEffect.destory()
         AudioEffect.initSoxAudioNative(
             AudioController.sampleRate * 2,

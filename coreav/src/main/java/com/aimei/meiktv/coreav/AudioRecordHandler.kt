@@ -28,7 +28,7 @@ class AudioRecordHandler {
         packageSize = minbuffersize / (2 * 16 * channel / 8)
         Log.w("春哥init", "packageSize=" + packageSize)
         tempBuffer = ShortArray(packageSize)
-        audioRecord.positionNotificationPeriod = packageSize / 2
+        audioRecord.positionNotificationPeriod = packageSize / 4
         audioRecord.setRecordPositionUpdateListener(object :
             AudioRecord.OnRecordPositionUpdateListener {
             override fun onMarkerReached(recorder: AudioRecord?) {

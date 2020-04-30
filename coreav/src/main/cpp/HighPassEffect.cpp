@@ -20,7 +20,7 @@ int HighPassEffect::initChild() {
         assert(sox_add_effect(chain,highpass_effect,&signalInfo,&signalInfo)==SOX_SUCCESS);
         delete[] *args;
         delete highpass_effect;
-        LOGE("LowPassEffect::initChild2");
+        LOGE("HighPassEffect::initChild2");
     }
     return SUCCESS;
 }

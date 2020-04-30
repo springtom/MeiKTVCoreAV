@@ -45,7 +45,6 @@ public:
 
     int sampleRate;
     int channels;
-    int bufferSize;
     float wetscale;
     float echoscale;
 
