@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.aimei.meiktv.coreav.AudioController
@@ -24,8 +25,12 @@ class MainActivity : AppCompatActivity(), OnRangeChangedListener {
         )
     }
 
+    var addVol = 0;
+    var lowPassFrequency = 8000;
+    var highPassFrequency = 100;
 
     var array = arrayOf("-15db", "-10db", "-5db", "0", "5db", "10db", "15db")
+    var wet_echo_reverb = arrayOf("0.1", "0.2", "0.3", "0.4", "0.5", "0.6", "0.7", "0.8", "0.9")
     var eqParams = arrayOf(
         floatArrayOf(60f, 0.2f, 0f),
         floatArrayOf(230f, 0.2f, 0f),
@@ -35,6 +40,7 @@ class MainActivity : AppCompatActivity(), OnRangeChangedListener {
         floatArrayOf(6000f, 0.2f, 0f)
     )
 
+
     var reverberance = 90
     var damping = 20
     var rootScale = 71
@@ -42,22 +48,102 @@ class MainActivity : AppCompatActivity(), OnRangeChangedListener {
     var preDelay = 20
     var wetGain = 6
 
-    var inputVolume  = 0.5f
+    var inputVolume = 0.5f
     var outputVolume = 0.5f
     var delay = 20;
     var attenuation = 0.6f
+
+
+    var wet = 0.3f
+    var echo = 0.3f
+    var reverb = 1 - wet - echo
+
+    var selectedEQ = true
+    var selectedReverb = true
+    var selectedEcho = true
+    var selectedAddVol = true;
+    var selectedLowPass = true;
+    var selectedHighPass = true;
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         openPermission(this)
         setContentView(R.layout.activity_main)
+
+        im_echo.isSelected = selectedEcho
+        im_eq.isSelected = selectedEQ
+        im_reverb.isSelected = selectedReverb
+        im_add_vol.isSelected = selectedAddVol
+        im_highpass.isSelected = selectedHighPass
+        im_lowpass.isSelected = selectedLowPass
+
+        im_echo.setOnClickListener {
+            if (im_echo.isSelected) {
+                selectedEcho = false
+            } else {
+                selectedEcho = true
+            }
+            im_echo.isSelected = selectedEcho
+        }
+        im_eq.setOnClickListener {
+            if (im_eq.isSelected) {
+                selectedEQ = false
+            } else {
+                selectedEQ = true
+            }
+            im_eq.isSelected = selectedEQ
+        }
+        im_reverb.setOnClickListener {
+            if (im_reverb.isSelected) {
+                selectedReverb = false
+            } else {
+                selectedReverb = true
+            }
+            im_reverb.isSelected = selectedReverb
+        }
+
+        im_add_vol.setOnClickListener {
+            if (im_add_vol.isSelected) {
+                selectedAddVol = false
+            } else {
+                selectedAddVol = true
+            }
+            im_add_vol.isSelected = selectedAddVol
+        }
+
+        im_lowpass.setOnClickListener {
+            if (im_lowpass.isSelected) {
+                selectedLowPass = false
+            } else {
+                selectedLowPass = true
+            }
+            im_lowpass.isSelected = selectedLowPass
+        }
+
+        im_highpass.setOnClickListener {
+            if (im_highpass.isSelected) {
+                selectedHighPass = false
+            } else {
+                selectedHighPass = true
+            }
+            im_highpass.isSelected = selectedHighPass
+        }
+
+        seekbar_add_vol.setProgress(addVol.toFloat())
+        seekbar_highpass.setProgress(highPassFrequency.toFloat())
+        seekbar_lowpass.setProgress(lowPassFrequency.toFloat())
+        seekbar_add_vol.setIndicatorTextDecimalFormat("0")
+        seekbar_highpass.setIndicatorTextDecimalFormat("0")
+        seekbar_lowpass.setIndicatorTextDecimalFormat("0")
+
         seekbar1.tickMarkTextArray = array
         seekbar2.tickMarkTextArray = array
         seekbar3.tickMarkTextArray = array
         seekbar4.tickMarkTextArray = array
         seekbar5.tickMarkTextArray = array
         seekbar6.tickMarkTextArray = array
+        seekbar17.tickMarkTextArray = wet_echo_reverb
         seekbar1.setProgress(eqParams[0][2])
         seekbar2.setProgress(eqParams[1][2])
         seekbar3.setProgress(eqParams[2][2])
@@ -70,6 +156,35 @@ class MainActivity : AppCompatActivity(), OnRangeChangedListener {
         seekbar10.setProgress(stereoDepth.toFloat())
         seekbar11.setProgress(preDelay.toFloat())
         seekbar12.setProgress(wetGain.toFloat())
+        seekbar13.setProgress(inputVolume)
+        seekbar14.setProgress(outputVolume)
+        seekbar15.setProgress(delay.toFloat())
+        seekbar16.setProgress(attenuation)
+        seekbar17.setProgress(wet, echo)
+
+        seekbar1.setIndicatorTextDecimalFormat("0.0")
+        seekbar2.setIndicatorTextDecimalFormat("0.0")
+        seekbar3.setIndicatorTextDecimalFormat("0.0")
+        seekbar4.setIndicatorTextDecimalFormat("0.0")
+        seekbar5.setIndicatorTextDecimalFormat("0.0")
+        seekbar6.setIndicatorTextDecimalFormat("0.0")
+        seekbar7.setIndicatorTextDecimalFormat("0.0")
+        seekbar8.setIndicatorTextDecimalFormat("0.0")
+        seekbar9.setIndicatorTextDecimalFormat("0.0")
+        seekbar10.setIndicatorTextDecimalFormat("0.0")
+        seekbar11.setIndicatorTextDecimalFormat("0.0")
+        seekbar12.setIndicatorTextDecimalFormat("0.0")
+        seekbar13.setIndicatorTextDecimalFormat("0.00")
+        seekbar14.setIndicatorTextDecimalFormat("0.00")
+        seekbar15.setIndicatorTextDecimalFormat("0.0")
+        seekbar16.setIndicatorTextDecimalFormat("0.00")
+        seekbar17.leftSeekBar.setIndicatorTextDecimalFormat("0.00")
+        seekbar17.rightSeekBar.setIndicatorTextDecimalFormat("0.00")
+
+        seekbar_add_vol.setOnRangeChangedListener(this)
+        seekbar_lowpass.setOnRangeChangedListener(this)
+        seekbar_highpass.setOnRangeChangedListener(this)
+
         seekbar1.setOnRangeChangedListener(this)
         seekbar2.setOnRangeChangedListener(this)
         seekbar3.setOnRangeChangedListener(this)
@@ -82,36 +197,60 @@ class MainActivity : AppCompatActivity(), OnRangeChangedListener {
         seekbar10.setOnRangeChangedListener(this)
         seekbar11.setOnRangeChangedListener(this)
         seekbar12.setOnRangeChangedListener(this)
+        seekbar13.setOnRangeChangedListener(this)
+        seekbar14.setOnRangeChangedListener(this)
+        seekbar15.setOnRangeChangedListener(this)
+        seekbar16.setOnRangeChangedListener(this)
+        seekbar17.setOnRangeChangedListener(this)
 
 
-        but1.setOnClickListener{
+
+
+        but1.setOnClickListener {
             iniiAudioEffect()
         }
         but2.setOnClickListener {
 
         }
-        but3.setOnClickListener{
+        but3.setOnClickListener {
 
             AudioController.init()
-            if("录制".equals(but3.text)){
+            if ("录制".equals(but3.text)) {
                 but3.setText("录制中")
                 AudioController.work()
-            }else if("录制中".equals(but3.text)){
+            } else if ("录制中".equals(but3.text)) {
                 but3.setText("录制")
                 AudioController.stop()
             }
         }
     }
 
-    private fun iniiAudioEffect(){
+    private fun iniiAudioEffect() {
         AudioEffect.destory()
         AudioEffect.initSoxAudioNative(
             AudioController.sampleRate * 2,
             AudioController.sampleRate, 2
         )
-        AudioEffect.addEqualizerEffectNative(eqParams)
-        AudioEffect.addReverbEffectNative(reverberance,damping,rootScale,stereoDepth,preDelay,wetGain)
-        AudioEffect.addEchoNative(inputVolume,outputVolume,delay,attenuation);
+        if (selectedEQ)
+            AudioEffect.addEqualizerEffectNative(eqParams)
+        if (selectedReverb)
+            AudioEffect.addReverbEffectNative(
+                reverberance,
+                damping,
+                rootScale,
+                stereoDepth,
+                preDelay,
+                wetGain
+            )
+        if (selectedEcho)
+            AudioEffect.addEchoNative(inputVolume, outputVolume, delay, attenuation)
+        if(selectedAddVol)
+            AudioEffect.addVolAddNative(addVol)
+        if(selectedLowPass)
+            AudioEffect.addLowPassEffectNative(lowPassFrequency)
+        if(selectedHighPass)
+            AudioEffect.addHighPassEffectNative(highPassFrequency)
+        AudioEffect.setWetEchoReverbScale(wet, echo)
     }
 
     override fun onDestroy() {
@@ -146,10 +285,12 @@ class MainActivity : AppCompatActivity(), OnRangeChangedListener {
         rightValue: Float,
         isFromUser: Boolean
     ) {
-
 //        Log.w("春哥", "leftValue=" + leftValue + "  rightValue=" + rightValue)
         if (view != null) {
             when (view.id) {
+                R.id.seekbar_add_vol -> addVol = leftValue.toInt()
+                R.id.seekbar_lowpass -> lowPassFrequency = leftValue.toInt()
+                R.id.seekbar_highpass -> highPassFrequency = leftValue.toInt()
                 R.id.seekbar1 -> eqParams[0][2] = leftValue
                 R.id.seekbar2 -> eqParams[1][2] = leftValue
                 R.id.seekbar3 -> eqParams[2][2] = leftValue
@@ -162,14 +303,21 @@ class MainActivity : AppCompatActivity(), OnRangeChangedListener {
                 R.id.seekbar10 -> stereoDepth = leftValue.toInt()
                 R.id.seekbar11 -> preDelay = leftValue.toInt()
                 R.id.seekbar12 -> wetGain = leftValue.toInt()
+                R.id.seekbar13 -> inputVolume = leftValue
+                R.id.seekbar14 -> outputVolume = leftValue
+                R.id.seekbar15 -> delay = leftValue.toInt()
+                R.id.seekbar16 -> attenuation = leftValue
+                R.id.seekbar17 -> {
+                    wet = leftValue
+                    echo = rightValue
+                    Log.w("春哥 MianAcitivty", "wet=" + wet + " echo=" + echo)
+                }
             }
         }
-
     }
 
     override fun onStopTrackingTouch(view: RangeSeekBar?, isLeft: Boolean) {
 
     }
-
 
 }

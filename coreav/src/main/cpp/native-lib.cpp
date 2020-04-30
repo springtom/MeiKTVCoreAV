@@ -9,6 +9,10 @@
 #include "ReverbEffect.h"
 #include "EchoParams.h"
 #include "EchoEffect.h"
+#include "FilterParams.h"
+#include "HighPassEffect.h"
+#include "LowPassEffect.h"
+#include "VolumeEffect.h"
 
 extern "C" {
 #include "sox.h"
@@ -102,15 +106,25 @@ Java_com_aimei_meiktv_coreav_AudioEffect_addReverbEffectNative(JNIEnv *env, jobj
 extern "C"
 JNIEXPORT jboolean JNICALL
 Java_com_aimei_meiktv_coreav_AudioEffect_addHighPassEffectNative(JNIEnv *env, jobject thiz,
-                                                                 jobject params) {
-    // TODO: implement addHighPassEffect()
+                                                                 jint frequency) {
+    FilterParams *filterParams = new FilterParams(frequency);
+    HighPassEffect *effect = new HighPassEffect(filterParams);
+    effect->init();
+    SoxManager &soxManager = SoxManager::getInstance();
+    soxManager.addEffect(effect);
+    return true;
 }
 
 extern "C"
 JNIEXPORT jboolean JNICALL
 Java_com_aimei_meiktv_coreav_AudioEffect_addLowPassEffectNative(JNIEnv *env, jobject thiz,
-                                                                jobject params) {
-    // TODO: implement addLowPassEffect()
+                                                                jint frequency) {
+    FilterParams *filterParams = new FilterParams(frequency);
+    LowPassEffect *effect = new LowPassEffect(filterParams);
+    effect->init();
+    SoxManager &soxManager = SoxManager::getInstance();
+    soxManager.addEffect(effect);
+    return true;
 }
 
 extern "C"
@@ -134,7 +148,11 @@ Java_com_aimei_meiktv_coreav_AudioEffect_addEchoNative(JNIEnv *env, jobject thiz
 extern "C"
 JNIEXPORT jboolean JNICALL
 Java_com_aimei_meiktv_coreav_AudioEffect_addVolAddNative(JNIEnv *env, jobject thiz, jint add_vol) {
-    // TODO: implement addVolAdd()
+    VolumeEffect * effect =  new VolumeEffect(add_vol);
+    effect->init();
+    SoxManager &soxManager = SoxManager::getInstance();
+    soxManager.addEffect(effect);
+    return true;
 }
 
 extern "C"
@@ -163,4 +181,11 @@ JNIEXPORT void JNICALL
 Java_com_aimei_meiktv_coreav_AudioEffect_destory(JNIEnv *env, jobject thiz) {
     SoxManager &soxManager = SoxManager::getInstance();
     soxManager.destory();
+}extern "C"
+JNIEXPORT void JNICALL
+Java_com_aimei_meiktv_coreav_AudioEffect_setWetEchoReverbScale(JNIEnv *env, jobject thiz,
+                                                               jfloat wet, jfloat echo) {
+    SoxManager &soxManager = SoxManager::getInstance();
+    soxManager.echoscale = echo;
+    soxManager.wetscale = wet;
 }

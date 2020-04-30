@@ -61,7 +61,7 @@ void SoxManager::doProcess(short *audioSample, int size) {
                 effect->process(audioSample, size);
             LOGE("doProcess3.5");
             for (int i = 0; i < size; ++i) {
-                audioSample[i] = 0.4 * audioSample[i] + 0.3 * wet[i] + 0.4 * echo[i];
+                audioSample[i] = (1-echoscale-wetscale) * audioSample[i] +wetscale * wet[i] + echoscale * echo[i];
             }
             LOGE("doProcess3.6");
             delete wet;

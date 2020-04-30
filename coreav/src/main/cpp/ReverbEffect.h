@@ -11,7 +11,6 @@
 
 class ReverbEffect: public SoxBaseEffect{
 protected:
-    int initChild(ReverbParams* reverbParams);
     int initChild();
     ReverbParams * reverbParams;
 

@@ -15,6 +15,7 @@ object AudioController {
     var creationMode = AudioTrack.MODE_STREAM
     lateinit var audioRecordHandler: AudioRecordHandler
     lateinit var audioTrackHandler: AudioTrackHandler
+    lateinit var audioEffectHandler: AudioEffectHandler
     var hasInit = false
     fun init() {
         if (hasInit)
@@ -23,16 +24,19 @@ object AudioController {
         audioRecordHandler.init(sampleRate, recordChannels, nframes, audioSource)
         audioTrackHandler = AudioTrackHandler()
         audioTrackHandler.init(sampleRate, playChannels, streamType, nframes, creationMode)
+        audioEffectHandler = AudioEffectHandler()
         hasInit = true
     }
 
     fun work() {
         audioRecordHandler?.startRecord()
+        audioEffectHandler?.process()
         audioTrackHandler?.play()
     }
 
     fun stop() {
         audioRecordHandler?.stop()
+        audioEffectHandler?.stop()
         audioTrackHandler?.stop()
     }
 

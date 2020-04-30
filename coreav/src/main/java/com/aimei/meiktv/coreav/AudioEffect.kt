@@ -17,11 +17,13 @@ object AudioEffect {
 
     external fun addVolAddNative(addVol:Int):Boolean
 
+    external fun setWetEchoReverbScale(wet:Float,echo:Float)
+
     external fun addEqualizerEffectNative(params: Array<FloatArray>):Boolean
 
-    external fun addHighPassEffectNative(params: MutableList<FloatArray>):Boolean
+    external fun addHighPassEffectNative(frequency: Int):Boolean
 
-    external fun addLowPassEffectNative(params: MutableList<FloatArray>):Boolean
+    external fun addLowPassEffectNative(frequency:Int):Boolean
 
     external fun addReverbEffectNative(reverberance:Int, damping:Int, roomScale:Int, stereoDepth:Int, preDelay:Int, wetGain:Int):Boolean
 

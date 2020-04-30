@@ -14,7 +14,7 @@ private:
 public:
     EQParams(int frequency, float width,int gain);
     virtual ~EQParams();
-    virtual void getFrequency(char** frequceny);
+    virtual void getFrequency(char** frequency);
     virtual void getWidth(char** width);
     virtual void getGain(char** gain);
     int getFrequency(){

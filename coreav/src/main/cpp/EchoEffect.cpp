@@ -9,11 +9,8 @@ EchoEffect::EchoEffect(EchoParams *echoParams) {
 EchoEffect::~EchoEffect() {
 
 }
+
 int EchoEffect::initChild() {
-    initChild(echoParams);
-    return SUCCESS;
-}
-int EchoEffect::initChild(EchoParams *echoParams) {
     LOGE("EchoEffect::initChild");
     if(echoParams!=NULL){
         sox_effect_t *echoEffect = sox_create_effect(sox_find_effect("echo"));

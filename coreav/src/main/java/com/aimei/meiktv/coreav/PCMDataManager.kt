@@ -5,8 +5,9 @@ import java.util.concurrent.ConcurrentLinkedQueue
 
 object PCMDataManager {
 
-    var dataLinkList: ConcurrentLinkedQueue<PCMData> = ConcurrentLinkedQueue()
+    var pcmLinkList: ConcurrentLinkedQueue<PCMData> = ConcurrentLinkedQueue()
     var nodataLinkList: ConcurrentLinkedQueue<PCMData> = ConcurrentLinkedQueue()
+    var soxPCMLinkList:ConcurrentLinkedQueue<PCMData> = ConcurrentLinkedQueue()
 
     //性能测试
     var dataLinkList1 = Collections.synchronizedList(LinkedList<PCMData>())
@@ -17,24 +18,31 @@ object PCMDataManager {
         return PCMData()
     }
 
-    fun putData(data: PCMData) {
-
-            dataLinkList.add(data)
-
+    fun putPCMData(data: PCMData) {
+            pcmLinkList.add(data)
 //        dataLinkList1.add(data)
-
     }
 
-    fun getData(): PCMData? {
 
-            if(dataLinkList.size>0)
-                return dataLinkList.poll()
+
+    fun getSoxPCMData(): PCMData? {
+            if(soxPCMLinkList.size>0)
+                return soxPCMLinkList.poll()
             return null
-
-
 //        if(dataLinkList1.size>0)
 //       return dataLinkList1.removeAt(0)
 //        return null
+    }
+
+
+    fun putSoxPCMData(data:PCMData){
+        soxPCMLinkList.add(data)
+    }
+
+    fun getPCMData():PCMData?{
+        if(pcmLinkList.size>0)
+            return pcmLinkList.poll()
+        return null
     }
 
     fun putNoData(data: PCMData) {
@@ -42,6 +50,6 @@ object PCMDataManager {
     }
 
     fun  clearData(){
-        dataLinkList.clear()
+        pcmLinkList.clear()
     }
 }

@@ -15,9 +15,12 @@ private:
     SoxManager() {
         echoEffect = NULL;
         hasInit = false;
+        wetscale =0;
+        echoscale =0;
     }
 
     bool hasInit;
+
     list<SoxBaseEffect *> effects;
 
     SoxBaseEffect *echoEffect;
@@ -43,6 +46,8 @@ public:
     int sampleRate;
     int channels;
     int bufferSize;
+    float wetscale;
+    float echoscale;
 
     virtual void initArgs(int sampleRate, int butterSize, int channels);
 

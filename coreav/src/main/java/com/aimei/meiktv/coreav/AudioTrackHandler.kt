@@ -2,10 +2,7 @@ package com.aimei.meiktv.coreav
 
 import android.media.AudioTrack
 import android.util.Log
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
 import java.lang.Exception
 class AudioTrackHandler {
     lateinit var track: AudioTrack
@@ -22,11 +19,11 @@ class AudioTrackHandler {
         Thread(Runnable {
             isstop = false
             while (!isstop){
-                var data = PCMDataManager.getData()
+                var data = PCMDataManager.getSoxPCMData()
                 Log.w("春哥","播放")
                 if(data!=null){
                     Log.w("春哥","播放"+data.time)
-                    track.write(data.soxData,0,data.size)
+                    track.write(data.rawData,0,data.size)
                     track.play()
                     data.time=0
                     data.size=0

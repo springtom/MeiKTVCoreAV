@@ -4,11 +4,8 @@ import android.media.AudioRecord
 import android.media.AudioRecord.RECORDSTATE_RECORDING
 import android.os.Handler
 import android.os.Looper
-import android.os.Message
 import android.util.Log
 import kotlinx.coroutines.*
-
-import kotlin.properties.Delegates
 
 class AudioRecordHandler {
 
@@ -45,8 +42,7 @@ class AudioRecordHandler {
                     var data = PCMDataManager.obtainNoPCMData()
                     data.size = bufferRead!!
                     System.arraycopy(tempBuffer, 0, data.rawData, 0, bufferRead)
-                    data.soxData = data.rawData?.let { AudioEffect.doprocess(it, data.size) }
-                    PCMDataManager.putData(data)
+                    PCMDataManager.putPCMData(data)
                 }
             }
         }, thread.handler)

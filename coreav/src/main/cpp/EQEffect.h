@@ -15,7 +15,7 @@ class EQEffect: public SoxBaseEffect {
 
 protected:
     list<EQParams*> * listeQ;
-    virtual int initChild(list<EQParams*> * listEq);
+
     virtual int initChild();
 public:
     EQEffect(list<EQParams*> * listEq);

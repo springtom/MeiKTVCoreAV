@@ -11,8 +11,8 @@ EQParams::EQParams(int frequency, float width, int gain) {
 }
 EQParams::~EQParams() {
 }
-void EQParams::getFrequency(char **frequceny) {
- sprintf(*frequceny,"%d",this->frequency);
+void EQParams::getFrequency(char **frequency) {
+ sprintf(*frequency,"%d",this->frequency);
 }
 void EQParams::getWidth(char **width) {
     sprintf(*width,"%fq",this->width);

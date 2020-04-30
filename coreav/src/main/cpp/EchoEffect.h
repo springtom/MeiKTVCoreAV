@@ -15,8 +15,6 @@ private:
 
     virtual int initChild();
 
-    virtual int initChild(EchoParams * echoParams);
-
 public:
     EchoEffect(EchoParams * echoParams);
     ~EchoEffect();

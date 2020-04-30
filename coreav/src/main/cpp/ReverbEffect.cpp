@@ -14,42 +14,41 @@ ReverbEffect::~ReverbEffect() {
 
 }
 
+
 int ReverbEffect::initChild() {
-    initChild(reverbParams);
-    return SUCCESS;
-}
-int ReverbEffect::initChild(ReverbParams* reverbParams) {
-    if(NULL==reverbParams)
-        return ERROR;
-    int argsSize = 7;
+    if(NULL!=reverbParams){
 
-    char *wetOnly = new char[10];
-    reverbParams->getWetOnly(&wetOnly);
+        int argsSize = 7;
 
-    char *reverbrance = new char[10];
-    reverbParams->getReverbrance(&reverbrance);
+        char *wetOnly = new char[10];
+        reverbParams->getWetOnly(&wetOnly);
 
-    char *damping = new char[10];
-    reverbParams->getDamping(&damping);
+        char *reverbrance = new char[10];
+        reverbParams->getReverbrance(&reverbrance);
 
-    char *roomScale = new char[10];
-    reverbParams->getRoomScale(&roomScale);
+        char *damping = new char[10];
+        reverbParams->getDamping(&damping);
 
-    char *stereoDepth = new char[10];
-    reverbParams->getStereoDepth(&stereoDepth);
+        char *roomScale = new char[10];
+        reverbParams->getRoomScale(&roomScale);
 
-    char *preDelay = new char[10];
-    reverbParams->getPreDelay(&preDelay);
+        char *stereoDepth = new char[10];
+        reverbParams->getStereoDepth(&stereoDepth);
 
-    char *wetGain = new char[10];
-    reverbParams->getWetGain(&wetGain);
+        char *preDelay = new char[10];
+        reverbParams->getPreDelay(&preDelay);
 
-    char * reverbArgs[] = {wetOnly,reverbrance,damping,roomScale,stereoDepth,preDelay,wetGain};
+        char *wetGain = new char[10];
+        reverbParams->getWetGain(&wetGain);
 
-    sox_effect_t * e = sox_create_effect(sox_find_effect("reverb"));
-    assert(sox_effect_options(e,argsSize,reverbArgs)==SOX_SUCCESS);
-    assert(sox_add_effect(chain,e,&signalInfo,&signalInfo)==SOX_SUCCESS);
-    free(e);
+        char * reverbArgs[] = {wetOnly,reverbrance,damping,roomScale,stereoDepth,preDelay,wetGain};
+
+        sox_effect_t * e = sox_create_effect(sox_find_effect("reverb"));
+        assert(sox_effect_options(e,argsSize,reverbArgs)==SOX_SUCCESS);
+        assert(sox_add_effect(chain,e,&signalInfo,&signalInfo)==SOX_SUCCESS);
+        delete[] *reverbArgs;
+        free(e);
+    }
     return SUCCESS;
 }
 

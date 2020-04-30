@@ -10,10 +10,10 @@ EQEffect::~EQEffect() {
 EQEffect::EQEffect(list<EQParams *> *listEq) {
     this->listeQ = listEq;
 }
-int EQEffect::initChild(list<EQParams *> * eqparamslist) {
-    if(NULL!=eqparamslist){
+int EQEffect::initChild() {
+    if(NULL!=listeQ){
         list<EQParams*>::iterator ite;
-        for(ite = eqparamslist->begin();ite!=eqparamslist->end();++ite){
+        for(ite = listeQ->begin();ite!=listeQ->end();++ite){
             EQParams* eqParams = *ite;
             int frequency  = eqParams->getFrequency();
             if(frequency>signalInfo.rate/2){
@@ -33,15 +33,9 @@ int EQEffect::initChild(list<EQParams *> * eqparamslist) {
             for (int i = 0; i < eqArgSize; ++i) {
                 delete eqArgs[i];
             }
-//            delete[]  *eqArgs;
            free(e);
         }
     }
     return SUCCESS;
 }
-int EQEffect::initChild() {
-    LOGE("addEQ15.3.1");
-    initChild(listeQ);
-    LOGE("addEQ15.3.2");
-    return SUCCESS;
-}
+
