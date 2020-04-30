@@ -12,3 +12,7 @@ FilterParams::~FilterParams() {
 void FilterParams::getFrequency(char **frequency) {
     sprintf(*frequency,"%d",this->frequency);
 }
+
+void FilterParams::getWidth(char **width) {
+    sprintf(*width,"0.2q");
+}

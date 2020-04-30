@@ -63,8 +63,8 @@ void SoxManager::doProcess(short *audioSample, int size) {
                 audioSample[i] = (1-echoscale-wetscale) * audioSample[i] +wetscale * wet[i] + echoscale * echo[i];
             }
             LOGE("doProcess3.6");
-            delete wet;
-            delete echo;
+            delete[] wet;
+            delete[] echo;
         } else {
             LOGE("doProcess4");
             if (effect != NULL)

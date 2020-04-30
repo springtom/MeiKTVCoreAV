@@ -31,7 +31,7 @@ int EQEffect::initChild() {
             assert(sox_effect_options(e,eqArgSize,eqArgs)==SOX_SUCCESS);
             assert(sox_add_effect(chain,e,&signalInfo,&signalInfo)==SOX_SUCCESS);
             for (int i = 0; i < eqArgSize; ++i) {
-                delete eqArgs[i];
+                delete[] eqArgs[i];
             }
            free(e);
         }

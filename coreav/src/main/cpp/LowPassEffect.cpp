@@ -13,8 +13,9 @@ int LowPassEffect::initChild() {
     if(filterParams!=NULL){
         sox_effect_t *lowpass_effect = sox_create_effect(sox_find_effect("lowpass"));
         char *frequency = new char[10];
-        char *width = "0.2q";
+        char *width = new char[10];
         filterParams->getFrequency(&frequency);
+        filterParams->getWidth(&width);
         char *args[] ={frequency,width};
         assert(sox_effect_options(lowpass_effect, 2, args) == SOX_SUCCESS);
         assert(sox_add_effect(chain, lowpass_effect, &signalInfo, &signalInfo) == SOX_SUCCESS);

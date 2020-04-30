@@ -13,6 +13,8 @@ public:
     FilterParams(int frequency);
     ~FilterParams();
     virtual void getFrequency(char** frequency);
+
+    virtual void getWidth(char** width);
 };
 
 

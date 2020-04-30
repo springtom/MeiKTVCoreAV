@@ -10,7 +10,6 @@ set_target_properties(sox PROPERTIES IMPORTED_LOCATION
 add_library(
         coreav
         SHARED
-        src/main/cpp/native-lib.cpp
         ${DIR_SRCS})
 
 
