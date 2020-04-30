@@ -136,16 +136,18 @@ void SoxBaseEffect::destory() {
         LOGE("soxBaseEffect destory1")
         chain = NULL;
     }
-
+    LOGE("soxBaseEffect destory2")
     if (NULL != intputSample) {
-        delete intputSample;
-        intputSample = NULL;
+//        delete intputSample;
+//        intputSample = NULL;
     }
 
+    LOGE("soxBaseEffect destory3")
     if (NULL != outputSample) {
-        delete outputSample;
-        outputSample = NULL;
+//        delete outputSample;
+//        outputSample = NULL;
     }
+    LOGE("soxBaseEffect destory4")
 }
 
 
